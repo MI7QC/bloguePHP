@@ -1,24 +1,16 @@
 <?php
 require '../vendor/autoload.php';
 
-$router = new AltoRouter();
-
-define('VIEW_PATH', dirname(__DIR__) . '/views');
-
-$router->map('GET','/blog',function () {
-    require VIEW_PATH . '/post/index.php';
-});
-
-$router->map('GET','/blog/category',function () {
-    require VIEW_PATH . '/category/show.php';
-});
+$whoops = new \Whoops\Run;
+$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+$whoops->register();
 
 
-$match = $router->match();
+$router = new App­\Router(dirname(__DIR__) . '/views');
 
-$match["target"]();
+print_r($router);
 
-
-// $router->map('GET', '/blog', function() {
-//     require dirname(__DIR__) . '/views/category/show.php';
-// });
+$router
+->get('/blog', 'post/index', 'blog')
+->get('/blog/category', 'category/show', 'category')
+->run();
