@@ -1,7 +1,9 @@
 <?php
+
 namespace App;
 
-class Router {
+class Router
+{
 
     /*
     *@var string 
@@ -13,7 +15,7 @@ class Router {
     */
     private $router;
 
-    public function __construct(string $viewPath) 
+    public function __construct(string $viewPath)
     {
         $this->viewPath = $viewPath;
         $this->router = new \AltoRouter();
