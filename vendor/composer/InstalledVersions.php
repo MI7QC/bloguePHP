@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '8a07dd83c760caa8aedf86d053460836e455c573',
+    'reference' => '2350d8f48133cc9a171ee1fcfe9dec98ffd3ce05',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '8a07dd83c760caa8aedf86d053460836e455c573',
+      'reference' => '2350d8f48133cc9a171ee1fcfe9dec98ffd3ce05',
     ),
     'altorouter/altorouter' => 
     array (
@@ -61,6 +61,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'df7933820090489623ce0be5e85c7e693638e536',
+    ),
+    'fzaninotto/faker' => 
+    array (
+      'pretty_version' => 'v1.9.2',
+      'version' => '1.9.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '848d8125239d7dbf8ab25cb7f054f1a630e68c2e',
     ),
     'psr/log' => 
     array (
