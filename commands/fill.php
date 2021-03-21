@@ -1,23 +1,14 @@
 <?php
 
+use App\Connection;
+
 require  dirname(__DIR__) . '/vendor/autoload.php';
 
 // use the factory to create a Faker\Generator instance : https://packagist.org/packages/fzaninotto/faker
 $faker = Faker\Factory::create('fr_FR');
 
 //CONNECTION BDD
-$servername = "127.0.0.1";
-$username = "root";
-$password = "";
-
-try {
-    $pdo = new PDO("mysql:host=$servername;dbname=tutoblog", $username, $password);
-    // set the PDO error mode to exception
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected successfully";
-} catch (PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
-}
+$pdo = Connection::getPDO();
 
 //VIDE LA BDD
 //Permet d'ignorer les jointures
