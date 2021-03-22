@@ -1,44 +1,24 @@
 <?php
 
 //appelle la Classe Text
-
 use App\Connection;
-use App\Helpers\Text;
+use App\URL;
 use App\Model\Post;
+use App\Helpers\Text;
 
 
 $title = 'Mon Blog';
-
 //CONNECTION BDD -> appelle class Connection et function getPDO()
 $pdo = Connection::getPDO();
 
-//Recuperer le parametre dans le URL la clé page. 
-//?? si la valeur n'existe pas  par defaul c'est 1
-$page = $_GET['page'] ?? 1;
 
-//validation si c'est un INT sinon renvoit une erreur
-if (!filter_var($page, FILTER_VALIDATE_INT)) {
-    throw new Exception('Numéro de page invalide');
-}
-
-// si page est strictement === '1' (chaine de caractere)  il est renvoyer sur la page Home
-if ($page === '1') {
-    header('Location: ' . $router->url('home'));
-    http_response_code(301);
-    exit();
-}
+//appelle la class URL methode(funtion) getInt
+$currentPage = URL::getPositiveInt('page', 1);
 
 
-//(int) converti la valeur en numerique  et 
-$currentPage = (int)$page;
-//retourne une erreur si la page est pas un nombre ou = 0 retourne error
-if ($currentPage <= 0) {
-    throw new Exception('Numéro de page invalide');
-}
 
 //Recupere le nombre d'article(post) et converti  FETCH_NUM = tableau numérique et (int) = entier et non une chaine de caractere
 $count = (int)$pdo->query('SELECT COUNT(id) FROM post')->fetch(PDO::FETCH_NUM)[0];
-
 $perPage = 12;
 // $count nombre d'article divisé par $perPage = 12   Ceil arrondi au nombre supérieur
 $pages = ceil($count / $perPage);
