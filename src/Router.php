@@ -36,7 +36,10 @@ class Router
     public function run(): self
     {
         $match = $this->router->match();
+        //recupere la vue via le url
         $view = $match['target'];
+        //sauvegarde les parametre de l'url 
+        $params = $match['params'];
         $router = $this; // reference a function url
         ob_start();
         require $this->viewPath . DIRECTORY_SEPARATOR . $view . '.php';
