@@ -15,8 +15,6 @@ $pdo = Connection::getPDO();
 //appelle la class URL methode(funtion) getInt
 $currentPage = URL::getPositiveInt('page', 1);
 
-
-
 //Recupere le nombre d'article(post) et converti  FETCH_NUM = tableau numérique et (int) = entier et non une chaine de caractere
 $count = (int)$pdo->query('SELECT COUNT(id) FROM post')->fetch(PDO::FETCH_NUM)[0];
 $perPage = 12;
