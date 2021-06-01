@@ -12,12 +12,11 @@ $title = 'Mon Blog';
 //CONNECTION BDD -> appelle class Connection et function getPDO()
 $pdo = Connection::getPDO();
 
-$pagionatedQuery = new PaginatedQuery(
+$PaginatedQuery = new PaginatedQuery(
     "SELECT * FROM post ORDER BY created_at DESC",
     "SELECT COUNT(id) FROM post"
 );
-$posts = $pagionatedQuery->getItems(,
-Post::class);
+$posts = $PaginatedQuery->getItems(Post::class);
 $link = $router->url('home');
 ?>
 

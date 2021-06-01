@@ -10,42 +10,44 @@ class PaginatedQuery
 
     private $query;
     private $queryCount;
-    private $classMapping;
     private $pdo;
     private $perPage;
     private $count;
+    private $items;
 
     public function __construct(
         string $query,
         string $queryCount,
-        string $classMapping,
         ?\PDO $pdo = null,
         int $perPage = 12
     ) {
         $this->query = $query;
         $this->queryCount = $queryCount;
-        $this->classMapping = $classMapping;
         $this->pdo = $pdo ?: Connection::getPDO();
         $this->perPage = $perPage;
     }
 
-    public function getItems(): array
+    public function getItems(string $classMapping): array
     {
-        //appelle la class URL methode(funtion) getInt
-        $currentPage = $this->getCurrentPage();
-        $pages = $this->getPages();
-        //si la page actuel est supérieur au nombre de page = erreur
-        if ($currentPage > $pages) {
-            throw new Exception('Cette page n\'existe pas');
-        }
-        // prend le nombre d'élement par page et le multipli par la page currente $currentPage
-        $offset = $this->perPage * ($currentPage - 1);
+        if ($this->itms === null)
+        {
+            //appelle la class URL methode(funtion) getInt
+            $currentPage = $this->getCurrentPage();
+            $pages = $this->getPages();
+            //si la page actuel est supérieur au nombre de page = erreur
+            if ($currentPage > $pages) {
+                throw new \Exception('Cette page n\'existe pas');
+            }
+            // prend le nombre d'élement par page et le multipli par la page currente $currentPage
+            $offset = $this->perPage * ($currentPage - 1);
 
-        // recupere les 12 dernier resultat
-        return $this->pdo->query(
-            $this->query .
-                " LIMIT {$this->perPage} OFFSET $offset"
-        )->fetchAll(PDO::FETCH_CLASS, $this->classMapping);
+            // recupere les 12 dernier resultat
+            $this->items = $this->pdo->query(
+                $this->query .
+                    " LIMIT {$this->perPage} OFFSET $offset"
+            )->fetchAll(PDO::FETCH_CLASS, $classMapping);
+        }
+        return $this->items;
     }
 
     public function previousLink(string $link): ?string
