@@ -1,10 +1,10 @@
 <?php
 
 //appelle la Classe Text
+use App\Helpers\Text;
+use App\Model\Post;
 use App\Connection;
 use App\URL;
-use App\Model\Post;
-use App\Helpers\Text;
 use APP\PaginatedQuery;
 
 
@@ -14,10 +14,10 @@ $pdo = Connection::getPDO();
 
 $pagionatedQuery = new PaginatedQuery(
     "SELECT * FROM post ORDER BY created_at DESC",
-    "SELECT COUNT(id) FROM post",
-    Post::class
+    "SELECT COUNT(id) FROM post"
 );
-$posts = $pagionatedQuery->getItems();
+$posts = $pagionatedQuery->getItems(,
+Post::class);
 $link = $router->url('home');
 ?>
 
