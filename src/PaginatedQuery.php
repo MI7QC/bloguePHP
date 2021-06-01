@@ -64,6 +64,7 @@ class PaginatedQuery
         $currentPage = $this->getCurrentPage();
         if ($currentPage <= 1) return null;
         if ($currentPage > 2) $link .= "?page=" . ($currentPage - 1);
+        $link .= "?page=" . ($currentPage + 1);
         return <<<HTML
         <a href="{$link}" class="btn btn-primary">&laquo; Page précédente</a>
         HTML;
@@ -85,6 +86,6 @@ class PaginatedQuery
                 ->fetch(PDO::FETCH_NUM)[0];
             }
             // $count nombre d'article divisé par $perPage = 12   Ceil arrondi au nombre supérieur
-            return ceil($count / $this->perPage);
+            return ceil($this->count / $this->perPage);
     }
 }
