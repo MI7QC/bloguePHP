@@ -36,7 +36,7 @@ if ($category->getSlug() !== $slug) {
     header('Location: ' . $url);
 }
 
-// dd($category);
+
 
 $title = "Catégorie {$category->getName()}";
 
